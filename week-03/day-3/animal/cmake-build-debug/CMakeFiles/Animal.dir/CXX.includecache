@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/HP/CLionProjects/Animal/animal.cpp
+iostream
+-
+animal.h
+/cygdrive/c/Users/HP/CLionProjects/Animal/animal.h
+
+/cygdrive/c/Users/HP/CLionProjects/Animal/animal.h
+string
+-
+

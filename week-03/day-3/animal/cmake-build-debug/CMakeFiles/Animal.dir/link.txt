@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Animal.dir/main.cpp.o CMakeFiles/Animal.dir/animal.cpp.o  -o Animal.exe -Wl,--out-implib,libAnimal.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

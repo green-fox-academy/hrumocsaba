@@ -1,0 +1,3 @@
+/cygdrive/c/Users/HP/CLionProjects/Animal/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/HP/CLionProjects/Animal/cmake-build-debug/CMakeFiles/Animal.dir
+/cygdrive/c/Users/HP/CLionProjects/Animal/cmake-build-debug/CMakeFiles/edit_cache.dir
