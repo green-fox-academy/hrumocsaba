@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/PetrolStation.dir/main.cpp.o CMakeFiles/PetrolStation.dir/Station.cpp.o CMakeFiles/PetrolStation.dir/Car.cpp.o  -o PetrolStation.exe -Wl,--out-implib,libPetrolStation.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
