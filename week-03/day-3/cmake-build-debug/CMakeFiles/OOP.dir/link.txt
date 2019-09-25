@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/OOP.dir/main.cpp.o CMakeFiles/OOP.dir/PostIt.cpp.o  -o OOP.exe -Wl,--out-implib,libOOP.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

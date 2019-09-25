@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/HP/CLionProjects/OOP/PostIt.cpp
+PostIt.h
+/cygdrive/c/Users/HP/CLionProjects/OOP/PostIt.h
+iostream
+-
+
+/cygdrive/c/Users/HP/CLionProjects/OOP/PostIt.h
+string
+-
+
