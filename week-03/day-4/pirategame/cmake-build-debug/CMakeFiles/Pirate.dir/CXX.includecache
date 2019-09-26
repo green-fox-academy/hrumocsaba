@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/HP/CLionProjects/Pirate/Pirate.cpp
+Pirate.h
+/cygdrive/c/Users/HP/CLionProjects/Pirate/Pirate.h
+Ship.h
+/cygdrive/c/Users/HP/CLionProjects/Pirate/Ship.h
+
+/cygdrive/c/Users/HP/CLionProjects/Pirate/Pirate.h
+iostream
+-
+string
+-
+time.h
+-
+random
+-
+stdlib.h
+-
+
+/cygdrive/c/Users/HP/CLionProjects/Pirate/Ship.h
+vector
+-
+string
+-
+stdlib.h
+-
+time.h
+-
+

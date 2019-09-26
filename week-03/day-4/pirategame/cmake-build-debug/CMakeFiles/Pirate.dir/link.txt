@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Pirate.dir/main.cpp.o CMakeFiles/Pirate.dir/Pirate.cpp.o CMakeFiles/Pirate.dir/Ship.cpp.o CMakeFiles/Pirate.dir/BattleApp.cpp.o CMakeFiles/Pirate.dir/Armada.cpp.o CMakeFiles/Pirate.dir/WarApp.cpp.o  -o Pirate.exe -Wl,--out-implib,libPirate.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
