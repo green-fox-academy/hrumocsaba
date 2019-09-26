@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Car.cpp
+Car.h
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Car.h
+iostream
+-
+Station.h
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Station.h
+
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Car.h
+Station.h
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Station.h
+string
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/string
+
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Station.h
+Car.h
+/cygdrive/c/Users/HP/CLionProjects/PetrolStation/Car.h
+string
+-
+
