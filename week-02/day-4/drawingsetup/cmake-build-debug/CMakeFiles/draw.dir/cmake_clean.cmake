@@ -1,13 +1,13 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/draw.dir/main.cpp.obj"
-  "CMakeFiles/draw.dir/draw.cpp.obj"
   "CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_framerate.c.obj"
   "CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_gfxPrimitives.c.obj"
   "CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_imageFilter.c.obj"
   "CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_rotozoom.c.obj"
-  "draw.pdb"
+  "CMakeFiles/draw.dir/draw.cpp.obj"
+  "CMakeFiles/draw.dir/main.cpp.obj"
   "draw.exe"
   "draw.exe.manifest"
+  "draw.pdb"
   "libdraw.dll.a"
 )
 

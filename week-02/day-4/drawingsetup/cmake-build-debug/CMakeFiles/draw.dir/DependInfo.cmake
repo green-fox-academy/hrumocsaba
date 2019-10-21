@@ -5,10 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/SDL2_plugins/gfx/src/SDL2_framerate.c" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_framerate.c.obj"
-  "C:/SDL2_plugins/gfx/src/SDL2_gfxPrimitives.c" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_gfxPrimitives.c.obj"
-  "C:/SDL2_plugins/gfx/src/SDL2_imageFilter.c" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_imageFilter.c.obj"
-  "C:/SDL2_plugins/gfx/src/SDL2_rotozoom.c" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_rotozoom.c.obj"
+  "C:/SDL2_plugins/gfx/src/SDL2_framerate.c" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_framerate.c.obj"
+  "C:/SDL2_plugins/gfx/src/SDL2_gfxPrimitives.c" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_gfxPrimitives.c.obj"
+  "C:/SDL2_plugins/gfx/src/SDL2_imageFilter.c" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_imageFilter.c.obj"
+  "C:/SDL2_plugins/gfx/src/SDL2_rotozoom.c" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/C_/SDL2_plugins/gfx/src/SDL2_rotozoom.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -20,8 +20,8 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "C:/SDL2_plugins/gfx/inc"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/HP/CLionProjects/drawingsetup/draw.cpp" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/draw.cpp.obj"
-  "C:/Users/HP/CLionProjects/drawingsetup/main.cpp" "C:/Users/HP/CLionProjects/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/main.cpp.obj"
+  "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/draw.cpp" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/draw.cpp.obj"
+  "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/main.cpp" "C:/Users/HP/Greenfox/hrumocsaba/week-02/day-4/drawingsetup/cmake-build-debug/CMakeFiles/draw.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
