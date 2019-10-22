@@ -179,15 +179,15 @@ int main() {
     PrintBinary(rotate_left(byte2, 5));
     printf("\n");
     printf("\n");
-    uint32_t array[3] = {0xAA, 0x55, 0x23};
+    uint32_t array[] = {0x00, 0x00, 0x00, 0x00, 0xFF};
 
-    for (int j = 0; j < 3; ++j) {
+    for (int j = 0; j < 5; ++j) {
         PrintBinary(array[j]);
     }
     printf("\n");
 
     for (int i = 0; i < 1000; ++i) {
-        array_rotator(array,3,1,1);
+        array_rotator(array,5,1,1);
         printf("\n");
 
     }
