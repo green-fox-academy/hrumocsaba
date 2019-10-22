@@ -24,7 +24,6 @@ uint8_t SetBit(uint8_t inp_byte, int bit_position){
 uint8_t ClearBit(uint8_t inp_byte, int position){
     uint8_t bit = 0b00000001 << position;
     uint8_t inp_byte2 = inp_byte ^ bit;
-    printf("%d %d \n", inp_byte, inp_byte2);
     if((inp_byte - inp_byte2) > 0){
         return inp_byte2;
     }else{
@@ -33,24 +32,25 @@ uint8_t ClearBit(uint8_t inp_byte, int position){
 
 }
 
-int main() {
-    /*
-     * Write a function called SetBit which takes a byte and a bit position
-     * and sets the bit of byte in the specified bit position to 1.
-     * E.g. byte = 0b1100, bit position = 1 => returns with 0b1110
-     */
+uint8_t toggle_bit(uint8_t inp_byte, int position){
+    uint8_t bitmask = 0b00000001 << position;
+    inp_byte = inp_byte ^ bitmask;
+    return inp_byte;
+}
 
-    /*
-     * Write a function called ClearBit which takes a byte and a bit position
-     * and clears the bit of byte in the specified bit position to 0.
+int main() {
+/*
+     * Write a function called ToggleBit which takes a byte and a bit position
+     * and toggles the bit of byte in the specified bit position.
+     * E.g. byte = 0b1100, bit position = 1 => returns with 0b1110
      * E.g. byte = 0b1100, bit position = 2 => returns with 0b1000
      */
 
-
-    int byte = 0b00001101;
+    int byte = 0b0100101;
     PrintBinary(byte ^ byte);
     PrintBinary(SetBit(byte, 5));
-    PrintBinary(ClearBit(byte,3));
+    PrintBinary(ClearBit(byte,0));
+    PrintBinary(toggle_bit(byte,2));
 
     return 0;
 }
