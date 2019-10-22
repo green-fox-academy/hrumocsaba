@@ -38,19 +38,44 @@ uint8_t toggle_bit(uint8_t inp_byte, int position){
     return inp_byte;
 }
 
+uint8_t is_even(uint8_t inp_byte){
+    uint8_t inp_byte2 = inp_byte;
+    uint8_t bitmask = 0b00000001;
+    inp_byte = inp_byte | bitmask;
+    printf("%d %d \n", inp_byte, inp_byte2);
+    inp_byte2 = inp_byte2 ^ inp_byte;
+    return inp_byte2;
+
+}
+uint8_t is_odd(uint8_t inp_byte){
+    uint8_t inp_byte2 = inp_byte;
+    uint8_t bitmask = 0b00000001;
+    inp_byte = inp_byte | bitmask;
+    printf("%d %d \n", inp_byte, inp_byte2);
+    inp_byte2 = inp_byte2 ^ inp_byte;
+    return inp_byte2 ^ bitmask;
+
+}
+
+
 int main() {
-/*
-     * Write a function called ToggleBit which takes a byte and a bit position
-     * and toggles the bit of byte in the specified bit position.
-     * E.g. byte = 0b1100, bit position = 1 => returns with 0b1110
-     * E.g. byte = 0b1100, bit position = 2 => returns with 0b1000
+
+       /* 1.
+     * Write a function called IsEven which takes a byte and returns with true
+     * if byte is even. Use only bitwise operators!
      */
 
-    int byte = 0b0100101;
-    PrintBinary(byte ^ byte);
-    PrintBinary(SetBit(byte, 5));
+    /* 2.
+     * Write a function called IsOdd which takes a byte and returns with true
+     * if byte is odd. Use only bitwise operators!
+     */
+
+    uint8_t byte = 0b0100101;
+    PrintBinary(SetBit(byte, 4));
     PrintBinary(ClearBit(byte,0));
     PrintBinary(toggle_bit(byte,2));
-
+    uint8_t byte2 = 0b0001101;
+    printf("%d \n", is_even(byte2));
+    printf("%d \n", is_odd(byte2));
     return 0;
 }
