@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 void PrintBinary(uint8_t byte) {
-    printf("%c%c%c%c %c%c%c%c\n",
+    printf("%c%c%c%c %c%c%c%c | ",
            (byte & 0x80 ? '1' : '0'),
            (byte & 0x40 ? '1' : '0'),
            (byte & 0x20 ? '1' : '0'),
@@ -62,10 +62,10 @@ uint8_t rotate_right(uint8_t inp_byte, int number){
         if(is_odd(inp_byte)){
             inp_byte = inp_byte >> 1;
             inp_byte = inp_byte | bitmask;
-            PrintBinary(inp_byte);
+            //PrintBinary(inp_byte);
         }else{
             inp_byte = inp_byte >> 1;
-            PrintBinary(inp_byte);
+            //PrintBinary(inp_byte);
         }
     }
     return inp_byte;
@@ -79,10 +79,10 @@ uint8_t rotate_left(uint8_t inp_byte, int number){
         if((inp_byte & 0x80)){
             inp_byte = inp_byte << 1;
             inp_byte = inp_byte | bitmask;
-            PrintBinary(inp_byte);
+            //PrintBinary(inp_byte);
         }else{
             inp_byte = inp_byte << 1;
-            PrintBinary(inp_byte);
+            //PrintBinary(inp_byte);
         }
     }
     return inp_byte;
@@ -90,23 +90,83 @@ uint8_t rotate_left(uint8_t inp_byte, int number){
 
 
 
-int main() {
-    /* 1.
- * Write a function called RotateRight which takes a byte and a number
- * and rotates the bits of byte in right direction number times.
- * It should return with the result.
- * E.g. byte = 0b1000000, number = 1 => returns 0b01000000
- * E.g. byte = 0b1000001, number = 2 => returns 0b01100000
- */
-
-    /* 2.
-     * Write a function called RotateLeft which takes a byte and a number
-     * and rotates the bits of byte in left direction number times.
-     * It should return with the result.
-     * E.g. byte = 0b1000000, number = 1 => returns 0b00000001
-     * E.g. byte = 0b1000001, number = 2 => returns 0b00000110
+void array_rotator(uint32_t ptr[], uint32_t bytes, uint32_t rotation_count, uint8_t right) {
+    /* This function should rotate the ptr buffer bits by rotation_count to left or right direction.
+     * The rotation direction is right if the right parameter is positive, left otherwise.
+     * E.g. ptr ->  |   0xAA    |    0x55   |    0x23   |
+     *              | 1010 1010 | 0101 0101 | 0010 0011 |
+     * array_rotator(ptr, 3, 2, 1) result is:
+     *              |   0xEA    |    0x95   |    0x48   |
+     *              | 1110 1010 | 1001 0101 | 0100 1000 |
      */
+    uint32_t temptr[bytes];
+    for (int k = 0; k < bytes; ++k) {
+        temptr[k]=ptr[k];
+    }
+    uint8_t bitmask1 = 0b10000000;
+    uint8_t bitmask2 = 0b00000001;
+    int j;
+    if(right) {
+        for (int i = 1; i <= rotation_count; ++i) {
+            for (j = 1; j < bytes - 1; ++j) {
+                if(is_odd(ptr[j])){
+                    ptr[j+1] = ptr [j+1] >> 1;
+                    ptr[j+1] = ptr [j+1] | bitmask1;
+                }else{
+                    ptr[j+1] = ptr[j+1] >> 1;
+                }
+                if (is_odd(ptr[j - 1])) {
+                    ptr[j] = ptr[j] >> 1;
+                    ptr[j] = ptr[j] | bitmask1;
+                }else{
+                    ptr[j] = ptr[j] >> 1;
+                }
+            }
+                if (is_odd(temptr[bytes - 1])) {
+                    ptr[0] = ptr[0] >> 1;
+                    ptr[0] = ptr[0] | bitmask1;
+                } else {
+                    ptr[0] = ptr[0] >> 1;
+                }
+            for (int k = 0; k < bytes; ++k) {
+                temptr[k]=ptr[k];
+            }
+        }
+    }else{
+        for (int i = 1; i <= rotation_count; ++i) {
+            for (j = 1; j < bytes - 1; ++j) {
+                if((ptr[j-1] & 0x80)){
+                    ptr[j+1] = ptr [j+1] << 1;
+                    ptr[j+1] = ptr [j+1] | bitmask2;
+                }else{
+                    ptr[j+1] = ptr[j+1] << 1;
+                }
+                if ((ptr[j] & 0x80)) {
+                    ptr[j] = ptr[j] << 1;
+                    ptr[j] = ptr[j] | bitmask2;
+                }else{
+                    ptr[j] = ptr[j] << 1;
+                }
+            }
+            if ((ptr[bytes-1] & 0x80)) {
+                ptr[0] = ptr[0] << 1;
+                ptr[0] = ptr[0] | bitmask2;
+            } else {
+                ptr[0] = ptr[0] << 1;
+            }
+            for (int k = 0; k < bytes; ++k) {
+                temptr[k]=ptr[k];
+            }
+        }
+    }
 
+    for (int j = 0; j < bytes; ++j) {
+        PrintBinary(ptr[j]);
+    }
+
+}
+
+int main() {
     uint8_t byte = 0b0100101;
     PrintBinary(SetBit(byte, 4));
     PrintBinary(ClearBit(byte,0));
@@ -114,9 +174,23 @@ int main() {
     uint8_t byte2 = 0b0001101;
     printf("%d \n", is_even(byte2));
     printf("%d \n \n", is_odd(byte2));
-    PrintBinary(rotate_right(byte2, 4));
+    PrintBinary(rotate_right(byte2, 5));
     printf("\n");
-    PrintBinary(rotate_left(byte2, 2));
+    PrintBinary(rotate_left(byte2, 5));
+    printf("\n");
+    printf("\n");
+    uint32_t array[3] = {0xAA, 0x55, 0x23};
+
+    for (int j = 0; j < 3; ++j) {
+        PrintBinary(array[j]);
+    }
+    printf("\n");
+
+    for (int i = 0; i < 1000; ++i) {
+        array_rotator(array,3,1,1);
+        printf("\n");
+
+    }
 
 
     return 0;
