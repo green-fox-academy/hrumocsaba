@@ -18,6 +18,16 @@ int main() {
     printf("%d \n",myVar);
     printf("%x \n",myVar);
     PrintBinary(myVar);
+    uint8_t shift1 = myVar << 5;
+    PrintBinary(shift1);
+    uint8_t shift2 = myVar >> 2;
+    PrintBinary(shift2);
+    myVar = myVar & 0b00100000;
+    PrintBinary(myVar);
+    myVar = myVar | 0b11100101;
+    PrintBinary(myVar);
+    myVar = myVar ^ 0b10111111;
+    PrintBinary(myVar);
 
     // 1. Print out myVar in decimal format
     // 2. Print out myVar in hexadecimal format
