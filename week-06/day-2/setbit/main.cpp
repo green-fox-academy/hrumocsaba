@@ -186,7 +186,7 @@ int main() {
     }
     printf("\n");
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 100; ++i) {
         array_rotator(array,5,1,1);
         printf("\n");
 
