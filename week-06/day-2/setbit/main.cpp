@@ -73,7 +73,6 @@ uint8_t rotate_right(uint8_t inp_byte, int number){
 
 uint8_t rotate_left(uint8_t inp_byte, int number){
     uint8_t bitmask = 0b00000001;
-    uint8_t bitmask2 = ~bitmask;
 
     for (int i = 0; i < number; ++i) {
         if((inp_byte & 0x80)){
@@ -90,7 +89,7 @@ uint8_t rotate_left(uint8_t inp_byte, int number){
 
 
 
-void array_rotator(uint32_t ptr[], uint32_t bytes, uint32_t rotation_count, uint8_t right) {
+void array_rotator(void* inptr, uint32_t bytes, uint32_t rotation_count, uint8_t right) {
     /* This function should rotate the ptr buffer bits by rotation_count to left or right direction.
      * The rotation direction is right if the right parameter is positive, left otherwise.
      * E.g. ptr ->  |   0xAA    |    0x55   |    0x23   |
@@ -99,6 +98,7 @@ void array_rotator(uint32_t ptr[], uint32_t bytes, uint32_t rotation_count, uint
      *              |   0xEA    |    0x95   |    0x48   |
      *              | 1110 1010 | 1001 0101 | 0100 1000 |
      */
+    uint32_t* ptr = (uint32_t*)inptr;
     uint32_t temptr[bytes];
     for (int k = 0; k < bytes; ++k) {
         temptr[k]=ptr[k];
@@ -109,25 +109,19 @@ void array_rotator(uint32_t ptr[], uint32_t bytes, uint32_t rotation_count, uint
     if(right) {
         for (int i = 1; i <= rotation_count; ++i) {
             for (j = 1; j < bytes - 1; ++j) {
+                ptr[j+1] = ptr [j+1] >> 1;
                 if(is_odd(ptr[j])){
-                    ptr[j+1] = ptr [j+1] >> 1;
                     ptr[j+1] = ptr [j+1] | bitmask1;
-                }else{
-                    ptr[j+1] = ptr[j+1] >> 1;
                 }
+                ptr[j] = ptr[j] >> 1;
                 if (is_odd(ptr[j - 1])) {
-                    ptr[j] = ptr[j] >> 1;
                     ptr[j] = ptr[j] | bitmask1;
-                }else{
-                    ptr[j] = ptr[j] >> 1;
                 }
             }
-                if (is_odd(temptr[bytes - 1])) {
-                    ptr[0] = ptr[0] >> 1;
-                    ptr[0] = ptr[0] | bitmask1;
-                } else {
-                    ptr[0] = ptr[0] >> 1;
-                }
+            ptr[0] = ptr[0] >> 1;
+            if (is_odd(temptr[bytes - 1])) {
+                ptr[0] = ptr[0] | bitmask1;
+            }
             for (int k = 0; k < bytes; ++k) {
                 temptr[k]=ptr[k];
             }
@@ -187,7 +181,7 @@ int main() {
     printf("\n");
 
     for (int i = 0; i < 100; ++i) {
-        array_rotator(array,5,1,1);
+        array_rotator(array,5,1,0);
         printf("\n");
 
     }
