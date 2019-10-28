@@ -17,5 +17,6 @@ int main()
     for (int j = 0; j < 10; ++j) {
         printf("%d\n", pointer[j]);
     }
+    free(pointer);
     return 0;
 }

@@ -16,5 +16,7 @@ int main()
         printf("%d\n", pointer[j]);
     }
 
+    free( pointer);
+
     return 0;
 }
