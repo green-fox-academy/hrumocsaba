@@ -17,8 +17,9 @@ int string_length(char* string){
 
 char* repeat(char string[], int number){
     char* dest = malloc(number * (string_length(string) * sizeof(char)));
-    strcpy(dest, string);
-    for (int i = 1; i < number; ++i) {
+    //strcpy(dest, string);
+    dest[0] = 0;
+    for (int i = 0; i < number; ++i) {
         strcat(dest,string);
     }
     return dest;
@@ -28,7 +29,7 @@ int main()
 {
     char str[] = "apple";
     char* temp = repeat(str, 5);
-    printf("%s", repeat(str, 5));
+    printf("%s", temp);
     free(temp);
     return 0;
 }

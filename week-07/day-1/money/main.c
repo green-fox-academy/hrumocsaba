@@ -26,8 +26,10 @@ int main()
 {
     int money = 1024;
     srand(time(NULL));
-    int random = (rand() % 20) +30;
+    int random = (rand() % 30) +20;
     relative_t* relatives = malloc(random * sizeof(relative_t));
+    printf("%d\n", sizeof(relative_t));
+
     for (int j = 0; j < random; ++j) {
         relatives[j].money = 0;
     }

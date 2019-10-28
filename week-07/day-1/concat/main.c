@@ -18,7 +18,7 @@ char* concat(char string1[], char string2[]){
     if(string1 == "" && string2 == ""){
         return "U entered nothing";
     }
-    char *strings = malloc(sizeof(char) * (string_length(string1)+(string_length(string2))));
+    char *strings = malloc(sizeof(char) * (string_length(string1)+string_length(string2)));
     strcpy(strings,strcat(string1,string2));
     return strings;
 }
@@ -28,6 +28,8 @@ int main()
 {
     char str1[]="hello";
     char str2[]="hy";
-    printf("%s", concat(str1, str2));
+    char* stringg = concat(str1, str2);
+    printf("%s", stringg);
+    free(stringg);
     return 0;
 }
