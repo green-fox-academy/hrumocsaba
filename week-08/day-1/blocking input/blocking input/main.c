@@ -38,7 +38,9 @@ int main(void)
     /* Replace with your application code */
     while (1) 
     {
-		knight();
+	
+			hello_world(&ON);
+	
 		
 		
 	}
