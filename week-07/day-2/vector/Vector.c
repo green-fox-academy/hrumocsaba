@@ -66,10 +66,11 @@ int empty(vector_t *vec) {
 
 void print(vector_t *vec) {
     if(empty(vec)) return;
+    printf("{|");
     for (int i = 0; i < vec->size; ++i) {
-        printf("%d ", vec->data[i]);
+        printf("%d|", vec->data[i]);
     }
-    printf("\n");
+    printf("}\n");
 }
 
 void erase(vector_t *vec, int at) {
