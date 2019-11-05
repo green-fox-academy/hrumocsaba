@@ -39,7 +39,7 @@ int main(void)
     while (1) 
     {
 	
-			hello_world(&ON);
+			knight();
 	
 		
 		

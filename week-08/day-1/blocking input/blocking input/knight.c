@@ -15,13 +15,13 @@ void knight(){
 	{
 		DDRB =  1 << i;
 		PORTB = 1 << i;
-		_delay_ms(100);
+		_delay_ms(130);
 	}
 	for (int i = 1; i < 4; i++)
 	{
 		DDRB =  DDRB >> 1;
 		PORTB = PORTB >> 1;
-		_delay_ms(100);
+		_delay_ms(130);
 	}
 }
 
