@@ -56,15 +56,15 @@ void output_pwm(){
 	}
 	else if (counter == 2)
 	{
-		duty =160;
+		duty =180;
 	}
 	else if (counter == 3)
 	{
-		duty = 60;
+		duty = 100;
 	}
 	else if (counter == 4)
 	{
-		duty= 10;
+		duty= 60;
 	}
 	else if (counter == 5)
 	{
