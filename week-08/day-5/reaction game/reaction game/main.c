@@ -13,6 +13,8 @@
 #include <time.h>
 #include <stdio.h>
 int seconds = 0;
+int player_seconds;
+uint8_t was_lit = 0;
 
 int ranom_number;
 int overflow_counter;
@@ -34,7 +36,7 @@ void timer2(){
 
 ISR(TIMER2_OVF_vect){
 	overflow_counter2++;
-	if (overflow_counter2 == 610)
+	if (overflow_counter2 == 305)
 	{
 		PORTC ^= 1<<PORTC3;
 		overflow_counter2 = 0;
@@ -52,72 +54,103 @@ ISR(TIMER0_OVF_vect){
 	}
 }
 ISR(PCINT1_vect){
+if (gamemode_number > 0){
+	if(was_lit == 0){
+		invalid();
+		playerpress_destroy();
+	}else if (was_lit == 1 && seconds-ranom_number < 300){
+		good();
+		playerpress_destroy();
+	}else if (was_lit == 1 && seconds-ranom_number > 300){
+		average();
+		playerpress_destroy();
+	}
+   }	
+}
+
+ISR(PCINT0_vect){
+	_delay_ms(250);
+	gamemode_number++;
+	ranom_number = rand()%10000;
+	PORTC |=  1 << 1;
+	PORTC |=  1 << 2;
+	PORTC |=  1 << 0;
+	playerpress();
 	seconds = 0;
 	TCCR2B = 0;
 	TIMSK2 = 0;
 	if(PORTC & 1<<PORTC3){
 		PORTC ^= 1<<PORTC3;
 	}
-	gamemode_number++;
 	timer();
-	_delay_ms(250);
-	
 }
 
-void blinking(){
-	_delay_ms(800);
-	PORTC ^= 1<<PORTC3;
-	
-}
-void random_countback(){
-		
-	ranom_number = rand()%9000;
+void random_countback(){	
 	if (seconds == ranom_number+3000)
 	{
-		PORTC |= 1<<PORTC3;
-		_delay_ms(100);
-		PORTC ^= 1<<PORTC3;
-		_delay_ms(100);
-		PORTC |= 1<<PORTC3;
-		_delay_ms(100);
-		PORTC ^= 1<<PORTC3;
-		gamemode_number = 0;
 		TCCR0B = 0;
 		TIMSK0 = 0;
 		timer2();
+		playerpress_destroy();
+		gamemode_number = 0;
+	}else if (seconds == ranom_number){
+		PORTC |= 1<<PORTC3;
+		was_lit = 1;
 	}
 }
 	
-void playerpress();
-
-
 void interrupt_start(){
-	sei();
+	PCMSK0 = 1<<0;
+	PCICR = 1<<0;
+}
+
+
+void playerpress(){
+	
 	PCMSK1 = 1<<4;
 	PCICR = 1<<1;
+}
+void playerpress_destroy(){
+	PCMSK1 = 0;
+	PCICR = 0;
+}
+
+void invalid(){
+	//red
+	PORTC ^= 1 << 0;
+	
+}
+void good(){
+	//blue
+	PORTC ^= 1 << 2;
+}
+void average(){
+	//green
+	PORTC ^= 1 << 1;
 }
 
 
 
 int main(void)
 {
+	sei();
 	DDRC = 0b00001111;
 	gamemode_number=0;
-	interrupt_start();
 	srand(time(NULL));
 	overflow_counter=0;
 	overflow_counter2=0;
     seconds=0;
+	interrupt_start();
 	timer2();
 
     /* Replace with your application code */
     while (1) 
     {
-		PORTC |= 1 << 0;
-		PORTC |= 1 << 2;
 		if(gamemode_number == 0){
+			was_lit = 0;
+			interrupt_start();
 			
-		}else{
+		}else if (gamemode_number>0){			
 			random_countback();
 		}	
     }
