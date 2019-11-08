@@ -1,10 +1,3 @@
-/*
- * reaction game.c
- *
- * Created: 2019. 11. 08. 8:58:57
- * Author : HP
- */ 
-
 #include <avr/io.h>
 #define F_CPU 16000000
 #include <util/delay.h>
@@ -12,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+
 int seconds = 0;
 int player_seconds;
 uint8_t was_lit = 0;
@@ -69,20 +63,21 @@ if (gamemode_number > 0){
 }
 
 ISR(PCINT0_vect){
-	_delay_ms(250);
 	gamemode_number++;
-	ranom_number = rand()%10000;
-	PORTC |=  1 << 1;
-	PORTC |=  1 << 2;
-	PORTC |=  1 << 0;
-	playerpress();
-	seconds = 0;
-	TCCR2B = 0;
-	TIMSK2 = 0;
-	if(PORTC & 1<<PORTC3){
-		PORTC ^= 1<<PORTC3;
+	if(gamemode_number > 1){
+		ranom_number = (rand()%10000)+1000;
+		PORTC |=  1 << 1;
+		PORTC |=  1 << 2;
+		PORTC |=  1 << 0;
+		playerpress();
+		seconds = 0;
+		TCCR2B = 0;
+		TIMSK2 = 0;
+		if(PORTC & 1<<PORTC3){
+			PORTC ^= 1<<PORTC3;
+		}
+		timer();
 	}
-	timer();
 }
 
 void random_countback(){	
@@ -155,4 +150,3 @@ int main(void)
 		}	
     }
 }
-
