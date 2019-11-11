@@ -101,6 +101,6 @@ int main(void)
 			puts(buffer);
  
 		}
-		}
+	}
 }
 
