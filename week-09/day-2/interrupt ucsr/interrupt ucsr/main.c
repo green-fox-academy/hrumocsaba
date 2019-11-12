@@ -51,11 +51,13 @@ void ProcessorDoesSomethingElse(){
 
 ISR(USART_RX_vect){
 	inp_counter++;
-	if (inp_counter < 10){
+	 if (inp_counter <= 10){
 		enqueue();
-	}else{
+	}
+	else{
 		inp_counter = 0;
 		dequeue();
+		printf("\n");
 	}	
 }
 
@@ -63,14 +65,19 @@ void enqueue(){
 	queue[tail] = UART_GetCharacter();
 	USART_Flush();
 	tail++;
+	if (queue[tail-1] == '\r')
+	{
+		tail--;
+		inp_counter = 0;
+		dequeue();
+	}
 }
 void dequeue(){
-	for (int i = head; i < tail; i++ )
+	for (int i = 0; i < tail; i++ )
 	{
 		printf("%c",queue[i]);
 	}
-	printf("\n");
-	head = 0;
+	//printf("\n");
 	tail = 0;
 	
 }
