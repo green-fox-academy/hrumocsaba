@@ -7,6 +7,7 @@
 #define F_CPU 16000000UL
 #include <avr/delay.h>
 uint8_t overflow_counter2;
+uint8_t temp;
 
 #define LED_DDR			DDRB
 #define LED_DDR_POS		DDRB5
@@ -15,8 +16,12 @@ uint8_t overflow_counter2;
 #define LED_PORT		PORTB
 #define LED_PORT_POS	PORTB5
 
+const uint8_t twodigit[8];
+
+
 void system_init()
 {
+	
 	//TODO
 	// Call the TWI driver init function
 	TWI_init();
@@ -25,6 +30,8 @@ void system_init()
 	// Interrupts must be enabled as STDIO lib uses interrupts for receive
 	sei();
 	// Don't forget to call the init function :)
+	led_osc_on();
+	timer();
 	
 }
 ISR(TIMER0_OVF_vect){
@@ -32,7 +39,14 @@ ISR(TIMER0_OVF_vect){
 	if (overflow_counter2 == 64)
 	{
 		PORTB ^= 1<<PORTB5;
-		get_temp(144);
+		TWI_init();
+		temp = get_temp(144);
+		printf("%d\n", temp);
+		TWI_init();
+		//clear_display();
+		digits_for_led(temp-6);
+		led_lightup();
+		reset();
 		
 		overflow_counter2 = 0;
 	}
@@ -55,34 +69,13 @@ void reset_twc(){
 
 int main(void)
 {
+
 	system_init();
 	
-	
-
 	printf("System initialized\n");
-	uint8_t shape[8] = {0x02, 0x3c, 0xa4, 0x24, 0x3c, 0x04, 0x05, 0x44};
-	led_osc_on();
-	draw_shape(shape);
-	led_lightup();
-	reset();
-	timer();
-	
-	
-	// Infinite loop
+
 	while (1) {
-		//TODO
-		//Write the temperature frequently.
 		
-		
-		
-		
-		
-
-		//TODO
-		//Advanced: Don't use delay, use timer.
-
-		//TODO
-		//Blink the led to make sure the code is running
 
 	}
 }

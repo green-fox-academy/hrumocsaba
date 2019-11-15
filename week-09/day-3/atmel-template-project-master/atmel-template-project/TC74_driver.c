@@ -7,11 +7,48 @@
 #define LED_OSC_ON 0b00100001
 #define  LED_ON 0b10000001
 #define LED_ADDRESS 0b11100000 
-
-const uint8_t led_data[] =
+uint8_t lzero[] =
 {
-	0x7c, 0x82, 0x82, 0x7c, 0x00, 0x84, 0xfe, 0x80
+	0x06, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x06
 };
+uint8_t lone[] =
+{
+	0x04, 0x06, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0e
+};
+uint8_t ltwo[] =
+{
+	0x06, 0x09, 0x08, 0x04, 0x02, 0x01, 0x01, 0x0f
+};
+uint8_t lthree[] =
+{
+	0x06, 0x09, 0x08, 0x06, 0x08, 0x08, 0x09, 0x06
+};
+uint8_t lfour[] =
+{
+	0x01, 0x01, 0x05, 0x05, 0x0f, 0x04, 0x04, 0x04
+};
+uint8_t lfive[] =
+{
+	0x0f, 0x01, 0x01, 0x07, 0x08, 0x08, 0x09, 0x06
+};
+uint8_t lsix[] =
+{
+	0x06, 0x09, 0x01, 0x07, 0x09, 0x09, 0x09, 0x06
+};
+uint8_t lseven[] =
+{
+	0x0f, 0x08, 0x08, 0x04, 0x02, 0x02, 0x02, 0x02
+};
+uint8_t leight[] =
+{
+	0x06, 0x09, 0x09, 0x06, 0x09, 0x09, 0x09, 0x06
+};
+uint8_t lnine[] =
+{
+	0x06, 0x09, 0x09, 0x09, 0x0e, 0x08, 0x09, 0x06
+};
+
+
 void TWI_init(void)
 {
 	// TODO:
@@ -117,12 +154,14 @@ uint8_t get_temp(uint8_t slv_address){
 	TWI_write(0b10010001);
 	TWI_read_ack();
 	TWCR |= 1 << TWINT;
-	_delay_ms(1);
+	TWI_read_ack();
+	
 	temp = TWDR;
-	printf("current temp is :%d\n", temp);
+	//printf("current temp is :%d\n", temp);
 	TWI_stop();
 	reset();
-		
+	
+	return temp;	
 }
 
 
@@ -130,7 +169,9 @@ uint8_t get_temp(uint8_t slv_address){
 void led_osc_on(){
 	TWI_start();
 	TWI_write(LED_ADDRESS);
+	TWI_read_ack();
 	TWI_write(LED_OSC_ON);
+	TWI_read_ack();
 	TWI_stop();
 }
 
@@ -142,13 +183,17 @@ void draw_shape(uint8_t data[])
 	
 	TWI_start();
 	TWI_write(LED_ADDRESS);
+	TWI_read_ack();
 	TWI_write(0b00000000);
+	TWI_read_ack();
 	
 	for (int i = 0; i < 8; i++)
 	{
 		buff = (data[i] >> 1) | (data[i] << 7);
 		TWI_write(buff);
+		TWI_read_ack();
 		TWI_write(0);
+		TWI_read_ack();
 	}
 	TWI_stop();
 }
@@ -156,9 +201,173 @@ void draw_shape(uint8_t data[])
 void led_lightup(){
 	TWI_start();
 	TWI_write(LED_ADDRESS);
+	TWI_read_ack();
 	TWI_write(LED_ON);
+	TWI_read_ack();
 	TWI_stop();
 }
+
+uint8_t* digits_for_led(uint8_t temp){
+	uint8_t twodigit[] =
+	{
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	};
+	
+	char numbers[2];
+	itoa(temp, numbers, 9);
+	char left = numbers[0];
+	char right = numbers[1];
+	switch (left){
+		case '0':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lzero[i];
+			}
+			break;
+		case '1':	
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lone[i];
+			}
+			break;
+		case '2':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= ltwo[i];
+			}
+			break;
+		case '3':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lthree[i];
+			}
+			break;
+		case '4':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lfour[i];
+			}
+			break;
+		case '5':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lfive[i];
+			}
+			break;
+		case '6':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lsix[i];
+			}
+			break;
+		case'7':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lseven[i];
+			}
+			break;
+		case '8':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= leight[i];
+			}
+			break;
+		case '9':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lnine[i];
+			}
+			break;
+		default:
+			break;
+		
+	}
+	
+	switch (right){
+		case '0':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lzero[i]<<4;
+			}
+			break;
+		case '1':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lone[i]<<4;
+			}
+			break;
+		case '2':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= ltwo[i]<<4;
+			}
+			break;
+		case '3':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lthree[i]<<4;
+			}
+			break;
+		case '4':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lfour[i]<<4;
+			}
+			break;
+		case '5':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lfive[i]<<4;
+			}
+			break;
+		case '6':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lsix[i]<<4;
+			}
+			break;
+		case '7':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lseven[i]<<4;
+			}
+			break;
+		case '8':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= leight[i]<<4;
+			}
+			break;
+		case '9':
+			for (int i = 0; i < 8; i++)
+			{
+				twodigit[i] |= lnine[i]<<4;
+			}
+			break;
+		default:
+		break;
+		
+	}
+	draw_shape(twodigit);
+	return twodigit;
+}
+
+void clear_display()
+{
+	TWI_start();
+	TWI_write(LED_ADDRESS);
+	TWI_read_ack();
+	TWI_write(0b00000000);
+	TWI_read_ack();
+	
+	for (int i = 0; i < 16; i++)
+	{
+		TWI_write(0x00);
+		TWI_read_ack();
+	}
+	TWI_stop();
+}
+
 
 
 //TODO Advanced:
