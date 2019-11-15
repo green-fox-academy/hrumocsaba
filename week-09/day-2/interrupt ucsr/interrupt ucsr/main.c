@@ -34,7 +34,7 @@ void USART_Flush( void )
 {
 	unsigned char dummy;
 	while ( UCSR0A & (1<<RXC0) ) dummy = UDR0;
-}
+}
 char UART_GetCharacter() {
 	// TODO:
 	// Paste here your working function code
@@ -51,14 +51,14 @@ void ProcessorDoesSomethingElse(){
 
 ISR(USART_RX_vect){
 	inp_counter++;
-	 if (inp_counter <= 10){
+	if (inp_counter <= 10){
 		enqueue();
 	}
 	else{
 		inp_counter = 0;
 		dequeue();
 		printf("\n");
-	}	
+	}
 }
 
 void enqueue(){
@@ -107,6 +107,5 @@ int main(void) {
 		ProcessorDoesSomethingElse();
 		
 		
-		}
+	}
 }
-
