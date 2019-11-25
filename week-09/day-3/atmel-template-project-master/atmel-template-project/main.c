@@ -30,7 +30,7 @@ void system_init()
 	// Interrupts must be enabled as STDIO lib uses interrupts for receive
 	sei();
 	// Don't forget to call the init function :)
-	led_osc_on();
+	
 	timer();
 	
 }
@@ -43,9 +43,11 @@ ISR(TIMER0_OVF_vect){
 		temp = get_temp(144);
 		printf("%d\n", temp);
 		TWI_init();
+		led_osc_on();
 		//clear_display();
-		digits_for_led(temp-6);
+		digits_for_led(temp-5);
 		led_lightup();
+		//led_osc_off();
 		reset();
 		
 		overflow_counter2 = 0;

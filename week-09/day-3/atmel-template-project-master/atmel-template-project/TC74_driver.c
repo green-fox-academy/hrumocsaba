@@ -5,8 +5,10 @@
 #define F_CPU 16000000UL
 #include <avr/delay.h>
 #define LED_OSC_ON 0b00100001
+#define LED_OSC_OFF 0b00100000
 #define  LED_ON 0b10000001
 #define LED_ADDRESS 0b11100000 
+
 uint8_t lzero[] =
 {
 	0x06, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x06
@@ -175,6 +177,15 @@ void led_osc_on(){
 	TWI_stop();
 }
 
+void led_osc_off(){
+	TWI_start();
+	TWI_write(LED_ADDRESS);
+	TWI_read_ack();
+	TWI_write(LED_OSC_OFF);
+	TWI_read_ack();
+	TWI_stop();
+}
+
 
 void draw_shape(uint8_t data[])
 {
@@ -214,65 +225,65 @@ uint8_t* digits_for_led(uint8_t temp){
 	};
 	
 	char numbers[2];
-	itoa(temp, numbers, 9);
-	char left = numbers[0];
-	char right = numbers[1];
+	itoa(temp, numbers, 8);
+	int left = temp/10;
+	int right = temp%10;
 	switch (left){
-		case '0':
+		case 0:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lzero[i];
 			}
 			break;
-		case '1':	
+		case 1:	
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lone[i];
 			}
 			break;
-		case '2':
+		case 2:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= ltwo[i];
 			}
 			break;
-		case '3':
+		case 3:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lthree[i];
 			}
 			break;
-		case '4':
+		case 4:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lfour[i];
 			}
 			break;
-		case '5':
+		case 5:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lfive[i];
 			}
 			break;
-		case '6':
+		case 6:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lsix[i];
 			}
 			break;
-		case'7':
+		case7:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lseven[i];
 			}
 			break;
-		case '8':
+		case 8:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= leight[i];
 			}
 			break;
-		case '9':
+		case 9:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lnine[i];
@@ -284,61 +295,61 @@ uint8_t* digits_for_led(uint8_t temp){
 	}
 	
 	switch (right){
-		case '0':
+		case 0:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lzero[i]<<4;
 			}
 			break;
-		case '1':
+		case 1:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lone[i]<<4;
 			}
 			break;
-		case '2':
+		case 2:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= ltwo[i]<<4;
 			}
 			break;
-		case '3':
+		case 3:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lthree[i]<<4;
 			}
 			break;
-		case '4':
+		case 4:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lfour[i]<<4;
 			}
 			break;
-		case '5':
+		case 5:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lfive[i]<<4;
 			}
 			break;
-		case '6':
+		case 6:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lsix[i]<<4;
 			}
 			break;
-		case '7':
+		case 7:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lseven[i]<<4;
 			}
 			break;
-		case '8':
+		case 8:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= leight[i]<<4;
 			}
 			break;
-		case '9':
+		case 9:
 			for (int i = 0; i < 8; i++)
 			{
 				twodigit[i] |= lnine[i]<<4;
